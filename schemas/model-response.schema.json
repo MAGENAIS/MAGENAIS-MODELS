@@ -1,43 +1,33 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/MAGENAIS/MAGENAIS-MODELS/schemas/model-response.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MAGENAIS/MAGENAIS-MODELS/blob/main/schemas/model-response.schema.json",
   "title": "MAGENAIS Model Response",
-  "description": "The normalized result envelope every MAGENAIS model returns. Mirrors the ModelResponse<T> TypeScript interface used internally by MAGENAIS (MASTER PROMPT V4.1 §13). \"output\" is intentionally left unconstrained here since its shape is model-specific.",
+  "description": "The normalized shape every MAGENAIS model returns from execute(). Mirrors src/models/types/ModelResponse.ts in the MAGENAIS project, field-for-field. If you change one, change the other.",
   "type": "object",
-  "required": ["success", "modelId", "modelVersion", "output"],
   "additionalProperties": false,
+  "required": ["success", "modelId", "modelVersion", "output"],
   "properties": {
-    "success": {
-      "type": "boolean"
-    },
-    "modelId": {
-      "type": "string",
-      "examples": ["magenais.decision-score"]
-    },
-    "modelVersion": {
-      "type": "string",
-      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z-.]+)?(\\+[0-9A-Za-z-.]+)?$"
-    },
+    "success": { "type": "boolean" },
+    "modelId": { "type": "string" },
+    "modelVersion": { "type": "string" },
     "output": {
-      "description": "Model-specific result payload. Shape is defined by each model's own documentation, not by this envelope."
+      "description": "Model-specific result payload. Shape is defined by each model, not by this schema."
     },
     "confidence": {
       "type": "number",
       "minimum": 0,
-      "maximum": 1,
-      "description": "Confidence in the result, where applicable. Should be omitted rather than guessed."
+      "maximum": 1
     },
     "evidence": {
-      "description": "Supporting evidence for the result (e.g. which perturbations were tested). Model-specific shape."
+      "description": "Model-specific supporting data for the result, e.g. perturbation trial counts."
     },
     "explanation": {
       "type": "string",
-      "description": "Human-readable explanation of how the output was reached."
+      "description": "Human-readable explanation of the result."
     },
     "warnings": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Caveats the caller/UI should surface, e.g. \"small sample size\"."
+      "items": { "type": "string" }
     },
     "metadata": {
       "type": "object",

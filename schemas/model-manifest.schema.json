@@ -1,9 +1,10 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/MAGENAIS/MAGENAIS-MODELS/schemas/model-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MAGENAIS/MAGENAIS-MODELS/blob/main/schemas/model-manifest.schema.json",
   "title": "MAGENAIS Model Manifest",
-  "description": "Static descriptive metadata every MAGENAIS model (built-in or externally installed) must satisfy. Mirrors the ModelManifest TypeScript interface used internally by MAGENAIS (MASTER PROMPT V4.1 §11).",
+  "description": "The metadata every MAGENAIS model publishes about itself. Mirrors src/models/types/ModelManifest.ts in the MAGENAIS project, field-for-field. If you change one, change the other.",
   "type": "object",
+  "additionalProperties": true,
   "required": [
     "id",
     "name",
@@ -17,35 +18,33 @@
     "pricing",
     "trust"
   ],
-  "additionalProperties": false,
   "properties": {
     "id": {
       "type": "string",
       "description": "Stable identifier, independent of any GitHub URL. Convention: \"magenais.<kebab-case-name>\".",
-      "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$",
       "examples": ["magenais.decision-score"]
     },
     "name": {
       "type": "string",
-      "minLength": 1
+      "description": "Human-readable display name.",
+      "examples": ["DecisionScore"]
     },
     "version": {
       "type": "string",
-      "description": "Semantic version of the model itself, independent of MAGENAIS's own version.",
-      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z-.]+)?(\\+[0-9A-Za-z-.]+)?$"
+      "description": "Semantic version of this model, independent of MAGENAIS's own version.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
     },
     "description": {
-      "type": "string",
-      "minLength": 1
+      "type": "string"
     },
     "author": {
       "type": "object",
       "required": ["name"],
-      "additionalProperties": false,
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
         "organization": { "type": "string" }
-      }
+      },
+      "additionalProperties": false
     },
     "type": {
       "type": "string",
@@ -60,51 +59,38 @@
       "type": "array",
       "items": { "type": "string" },
       "minItems": 1,
-      "examples": [["builtin-local"], ["api"]]
+      "description": "Runtime ids this model can execute under, e.g. \"builtin-local\", \"api\"."
     },
     "license": {
       "type": "object",
       "required": ["type"],
-      "additionalProperties": false,
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "SPDX identifier where possible, e.g. \"Apache-2.0\", \"MIT\".",
-          "examples": ["Apache-2.0", "MIT"]
-        },
+        "type": { "type": "string", "examples": ["Apache-2.0", "MIT"] },
         "url": { "type": "string", "format": "uri" }
-      }
+      },
+      "additionalProperties": false
     },
     "pricing": {
       "type": "object",
       "required": ["type"],
-      "additionalProperties": false,
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["free", "paid", "freemium", "enterprise"]
-        }
-      }
+        "type": { "type": "string", "enum": ["free", "paid", "freemium", "enterprise"] }
+      },
+      "additionalProperties": false
     },
     "trust": {
       "type": "string",
-      "enum": [
-        "magenais-verified",
-        "community-verified",
-        "experimental",
-        "unverified"
-      ]
+      "enum": ["magenais-verified", "community-verified", "experimental", "unverified"]
     },
     "uri": {
       "type": "string",
-      "description": "Optional canonical URI form.",
-      "pattern": "^magenais://[a-z0-9-]+@\\d+\\.\\d+\\.\\d+$",
+      "description": "Canonical URI, independent of repository location.",
       "examples": ["magenais://decision-score@1.0.0"]
     },
     "repository": {
       "type": "string",
-      "description": "Optional link to the model's own repository, for display only — never used as its identity.",
-      "format": "uri"
+      "description": "Name of this model's independent GitHub repository, if published.",
+      "examples": ["MAGENAIS-MODEL-DECISION-SCORE"]
     },
     "documentation": {
       "type": "string",

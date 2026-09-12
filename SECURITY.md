@@ -2,54 +2,39 @@
 
 ## Scope
 
-This repository contains **only** metadata: JSON manifests, JSON Schemas,
-and Markdown documentation. There is no executable code, no build step,
-and no runtime here. The security-relevant surface is limited to:
+This repository contains **only static data**: JSON metadata
+(`catalog/models.json`), JSON Schemas (`schemas/`), and a static HTML page
+(`index.html`). It has:
 
-- The accuracy and integrity of `catalog/models.json` (does it point to
-  the correct, legitimate repository for each model?).
-- The correctness of the JSON Schemas, since MAGENAIS and other consumers
-  validate model manifests against them before registering a model.
+- no server-side code,
+- no build step,
+- no runtime dependencies,
+- no code that is ever executed as part of consuming the catalog.
 
-## What this catalog does NOT do
+Consuming the catalog means reading and validating JSON against the
+published schemas — nothing in this repository is `eval()`'d or executed.
 
-- It does not download, execute, `eval()`, or otherwise run any code from
-  any listed repository. Discovery and installation are always explicit,
-  user-initiated actions in the consuming application (e.g. MAGENAIS's
-  Models Zoo), never automatic.
-- It does not host binaries, model weights, or executable artifacts.
+## Reporting a Vulnerability
 
-## Trust levels
+If you find something concerning here — for example, a catalog entry
+pointing at a malicious or unexpected URL, or a schema that would
+incorrectly validate unsafe data as safe — please open a private security
+advisory on this repository (GitHub → Security → Advisories → "Report a
+vulnerability") rather than a public issue.
 
-Every catalog entry declares a `trust` field:
+## A note on trust
 
-| Level | Meaning |
-|---|---|
-| `magenais-verified` | Passed MAGENAIS's manifest, security, and reproducibility verification. |
-| `community-verified` | Reviewed and vouched for by the community, not by MAGENAIS directly. |
-| `experimental` | Functional and tested by its own author; not yet independently verified. |
-| `unverified` | Listed for discovery only — use at your own risk. |
+This catalog is a **directory**, not a code-signing authority. Each
+model's `trust` field (`magenais-verified`, `community-verified`,
+`experimental`, `unverified`) reflects MAGENAIS's own review process, not
+a cryptographic guarantee. Anyone consuming a model listed here —
+including MAGENAIS itself — is expected to:
 
-Consumers should treat `experimental` and `unverified` entries with the
-same caution as any third-party code: read the source, run the tests
-yourself, and do not grant elevated permissions or credentials to a model
-you have not reviewed.
+- verify the model repository's own `LICENSE`, `SECURITY.md`, and tests
+  independently before running its code,
+- never execute a model's code automatically based solely on its presence
+  in this catalog.
 
-## Reporting a problem with a listing
-
-If you find:
-- a catalog entry pointing to a repository other than the one it claims,
-- a manifest that doesn't match the JSON Schema,
-- a listed license that doesn't match the actual repository's `LICENSE`
-  file,
-- or any other integrity issue with `catalog/models.json` or the schemas,
-
-please open a private security advisory on this repository (GitHub →
-Security → Report a vulnerability) rather than a public issue, so it can
-be corrected before wider disclosure.
-
-## Reporting a problem with a specific model's code
-
-Security issues in an individual model's implementation (e.g.
-`MAGENAIS-MODEL-DECISION-SCORE`) should be reported to that model's own
-repository, using its own `SECURITY.md`.
+See the MAGENAIS project's own model-installation security rules for how
+it handles this (manifest validation, checksum verification, explicit
+installation — no automatic execution of downloaded code).
