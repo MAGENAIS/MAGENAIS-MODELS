@@ -9,329 +9,290 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --paper: #E9EDEC;
-    --paper-raised: #F3F5F4;
-    --ink: #171D1C;
-    --ink-soft: #454F4D;
-    --rule: #C7CFCD;
-    --accent: #1F6F78;
-    --accent-ink: #0F3E43;
-    --status-dev: #A9784F;
-    --status-planned: #6B7674;
-    --status-live: #1F6F78;
-    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
-    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  }
-
-  * { box-sizing: border-box; }
-
-  html { color-scheme: light; }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--serif);
-    font-size: 17px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  a { color: var(--accent-ink); text-decoration-thickness: 1px; text-underline-offset: 2px; }
-  a:hover { color: var(--accent); }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  header.hero {
-    padding: 72px 0 40px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .kicker {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin: 0 0 18px;
-  }
-  .kicker a { color: var(--ink-soft); }
-
-  h1 {
-    font-size: clamp(2rem, 4.2vw, 2.85rem);
-    line-height: 1.15;
-    margin: 0 0 20px;
-    font-weight: 600;
-    max-width: 15ch;
-  }
-
-  .lede {
-    font-size: 1.15rem;
-    color: var(--ink-soft);
-    max-width: 52ch;
-    margin: 0 0 8px;
-  }
-
-  .lede + .lede { margin-top: 12px; }
-
-  main { padding: 48px 0 96px; }
-
-  h2 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin: 0 0 6px;
-  }
-
-  .section-note {
-    color: var(--ink-soft);
-    font-size: 0.98rem;
-    max-width: 60ch;
-    margin: 0 0 32px;
-  }
-
-  ul.records { list-style: none; margin: 0; padding: 0; }
-
-  .record {
-    border-top: 1px solid var(--rule);
-    padding: 26px 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  ul.records li:last-child .record { border-bottom: 1px solid var(--rule); }
-
-  .record-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .record-id {
-    font-family: var(--mono);
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-  }
-
-  .record-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 2px 0 0;
-  }
-
-  .status {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    padding: 3px 9px;
-    border-radius: 3px;
-    border: 1px solid currentColor;
-    white-space: nowrap;
-    align-self: flex-start;
-  }
-  .status.dev { color: var(--status-dev); }
-  .status.planned { color: var(--status-planned); }
-  .status.live { color: var(--status-live); }
-
-  .record-desc {
-    max-width: 62ch;
-    color: var(--ink);
-  }
-
-  dl.meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 28px;
-    margin: 4px 0 0;
-    font-size: 0.88rem;
-    font-family: var(--mono);
-    color: var(--ink-soft);
-  }
-  dl.meta div { display: flex; gap: 6px; }
-  dl.meta dt::after { content: ":"; }
-  dl.meta dd { margin: 0; color: var(--ink); }
-
-  .record-link { font-size: 0.95rem; }
-
-  .empty-note {
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    font-style: italic;
-    margin-top: 4px;
-  }
-
-  section + section { margin-top: 56px; }
-
-  .resources {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 18px 32px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  .resources li { border-top: 1px solid var(--rule); padding-top: 14px; }
-  .resources a { font-weight: 600; display: block; margin-bottom: 4px; }
-  .resources span { color: var(--ink-soft); font-size: 0.92rem; }
-
-  footer {
-    border-top: 1px solid var(--rule);
-    padding: 28px 0 56px;
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-  }
-  footer a { color: var(--ink-soft); }
-
-  @media (max-width: 520px) {
-    header.hero { padding-top: 48px; }
-    body { font-size: 16px; }
-  }
+:root {
+--paper: #E9EDEC;
+--paper-raised: #F3F5F4;
+--ink: #171D1C;
+--ink-soft: #454F4D;
+--rule: #C7CFCD;
+--accent: #1F6F78;
+--accent-ink: #0F3E43;
+--status-dev: #A9784F;
+--status-planned: #6B7674;
+--status-live: #1F6F78;
+--serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+--mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body {
+margin: 0;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--serif);
+font-size: 17px;
+line-height: 1.55;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent-ink); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap {
+max-width: 760px;
+margin: 0 auto;
+padding: 0 24px;
+}
+header.hero {
+padding: 72px 0 40px;
+border-bottom: 1px solid var(--rule);
+}
+.kicker {
+font-family: var(--mono);
+font-size: 13px;
+color: var(--ink-soft);
+margin: 0 0 18px;
+}
+.kicker a { color: var(--ink-soft); }
+h1 {
+font-size: clamp(2rem, 4.2vw, 2.85rem);
+line-height: 1.15;
+margin: 0 0 20px;
+font-weight: 600;
+max-width: 15ch;
+}
+.lede {
+font-size: 1.15rem;
+color: var(--ink-soft);
+max-width: 52ch;
+margin: 0 0 8px;
+}
+.lede + .lede { margin-top: 12px; }
+main { padding: 48px 0 96px; }
+h2 {
+font-size: 1.05rem;
+font-weight: 600;
+margin: 0 0 6px;
+}
+.section-note {
+color: var(--ink-soft);
+font-size: 0.98rem;
+max-width: 60ch;
+margin: 0 0 32px;
+}
+ul.records { list-style: none; margin: 0; padding: 0; }
+.record {
+border-top: 1px solid var(--rule);
+padding: 26px 0;
+display: grid;
+grid-template-columns: 1fr;
+gap: 10px;
+}
+ul.records li:last-child .record { border-bottom: 1px solid var(--rule); }
+.record-head {
+display: flex;
+align-items: baseline;
+justify-content: space-between;
+gap: 16px;
+flex-wrap: wrap;
+}
+.record-id {
+font-family: var(--mono);
+font-size: 0.82rem;
+color: var(--ink-soft);
+}
+.record-name {
+font-size: 1.25rem;
+font-weight: 600;
+margin: 2px 0 0;
+}
+.status {
+font-family: var(--mono);
+font-size: 0.78rem;
+padding: 3px 9px;
+border-radius: 3px;
+border: 1px solid currentColor;
+white-space: nowrap;
+align-self: flex-start;
+}
+.status.dev { color: var(--status-dev); }
+.status.planned { color: var(--status-planned); }
+.status.live { color: var(--status-live); }
+.record-desc {
+max-width: 62ch;
+color: var(--ink);
+}
+dl.meta {
+display: flex;
+flex-wrap: wrap;
+gap: 4px 28px;
+margin: 4px 0 0;
+font-size: 0.88rem;
+font-family: var(--mono);
+color: var(--ink-soft);
+}
+dl.meta div { display: flex; gap: 6px; }
+dl.meta dt::after { content: ":"; }
+dl.meta dd { margin: 0; color: var(--ink); }
+.record-link { font-size: 0.95rem; }
+.empty-note {
+font-size: 0.9rem;
+color: var(--ink-soft);
+font-style: italic;
+margin-top: 4px;
+}
+section + section { margin-top: 56px; }
+.resources {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+gap: 18px 32px;
+padding: 0;
+margin: 0;
+list-style: none;
+}
+.resources li { border-top: 1px solid var(--rule); padding-top: 14px; }
+.resources a { font-weight: 600; display: block; margin-bottom: 4px; }
+.resources span { color: var(--ink-soft); font-size: 0.92rem; }
+footer {
+border-top: 1px solid var(--rule);
+padding: 28px 0 56px;
+color: var(--ink-soft);
+font-size: 0.9rem;
+}
+footer a { color: var(--ink-soft); }
+@media (max-width: 520px) {
+header.hero { padding-top: 48px; }
+body { font-size: 16px; }
+}
 </style>
 </head>
 <body>
-
-  <header class="hero">
-    <div class="wrap">
-      <p class="kicker"><a href="https://github.com/MAGENAIS">MAGENAIS</a> / Models</p>
-      <h1>A catalog of models you can run without the platform they came from.</h1>
-      <p class="lede">Each model below is its own independent, open-source repository — clone it, read it, run it on its own. The MAGENAIS platform is one consumer of this catalog, not the only way in.</p>
-      <p class="lede">No API key, no account, and no cloud service is required to run any of them.</p>
-    </div>
-  </header>
-
-  <main>
-    <div class="wrap">
-
-      <section id="models">
-        <h2>Models</h2>
-        <p class="section-note">
-          A model is listed here as <strong>published</strong> once it has a
-          tagged, tested release in its own repository — not while it's
-          still being built. Until then, it appears with its planned status
-          so you can see what's coming.
-        </p>
-
-        <ul class="records" id="records">
-          <!-- Populated by renderRecords() below; this static markup is the no-JS / fetch-failure fallback. -->
-          <li>
-            <div class="record">
-              <div class="record-head">
-                <div>
-                  <p class="record-id">magenais.decision-score</p>
-                  <p class="record-name">DecisionScore</p>
-                </div>
-                <span class="status dev">in development</span>
-              </div>
-              <p class="record-desc">Explainable multi-criteria decision intelligence: ranks options against weighted criteria, and reports a Decision Stability Index and Decision Flip Point for how confident that ranking is.</p>
-              <dl class="meta">
-                <div><dt>License</dt><dd>Apache-2.0</dd></div>
-                <div><dt>Type</dt><dd>algorithm</dd></div>
-                <div><dt>Trust</dt><dd>experimental</dd></div>
-              </dl>
-            </div>
-          </li>
-          <li>
-            <div class="record">
-              <div class="record-head">
-                <div>
-                  <p class="record-id">magenais.pattern-sense</p>
-                  <p class="record-name">PatternSense</p>
-                </div>
-                <span class="status planned">planned</span>
-              </div>
-              <p class="record-desc">Discovers and quantifies patterns in structured data, distinguishing association from correlation from causal hypothesis, with a Pattern Transfer Score for cross-partition consistency.</p>
-            </div>
-          </li>
-          <li>
-            <div class="record">
-              <div class="record-head">
-                <div>
-                  <p class="record-id">magenais.anomaly-mind</p>
-                  <p class="record-name">AnomalyMind</p>
-                </div>
-                <span class="status planned">planned</span>
-              </div>
-              <p class="record-desc">Lightweight, local, explainable anomaly detection over tabular and time-series data, with an Anomaly Context Stability score distinguishing threshold-sensitive anomalies from stable ones.</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <section id="resources">
-        <h2>For developers</h2>
-        <p class="section-note">The catalog and its schemas are plain files — read them directly, or point your own tooling at them.</p>
-        <ul class="resources">
-          <li>
-            <a href="./catalog/models.json">catalog/models.json</a>
-            <span>Machine-readable list of published models</span>
-          </li>
-          <li>
-            <a href="./schemas/model-manifest.schema.json">model-manifest.schema.json</a>
-            <span>What a model publishes about itself</span>
-          </li>
-          <li>
-            <a href="./schemas/model-response.schema.json">model-response.schema.json</a>
-            <span>What a model returns when run</span>
-          </li>
-          <li>
-            <a href="https://github.com/MAGENAIS/MAGENAIS-MODELS">Source on GitHub</a>
-            <span>Contributions welcome — see CONTRIBUTING.md</span>
-          </li>
-        </ul>
-      </section>
-
-    </div>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <p>Catalog metadata and schemas are Apache-2.0 licensed. Each model repository carries its own license. MAGENAIS Core, the platform that consumes this catalog, is separate and proprietary — this catalog does not depend on it, and neither does any model listed here.</p>
-    </div>
-  </footer>
-
-  <script>
-    // Progressive enhancement: try to load the live catalog and upgrade any
-    // matching static record to "published" with a real version + link.
-    // If this fails (offline, opened via file://, catalog still empty),
-    // the static markup above stands as-is — no error is shown to the reader.
-    (function () {
-      fetch('./catalog/models.json', { cache: 'no-store' })
-        .then(function (res) { return res.ok ? res.json() : []; })
-        .then(function (published) {
-          if (!Array.isArray(published) || published.length === 0) return;
-
-          published.forEach(function (entry) {
-            var row = document.querySelector('.record-id')
-              ? Array.prototype.find.call(
-                  document.querySelectorAll('.record-id'),
-                  function (el) { return el.textContent.trim() === entry.id; }
-                )
-              : null;
-            if (!row) return;
-
-            var record = row.closest('.record');
-            var statusEl = record.querySelector('.status');
-            statusEl.textContent = 'published ' + entry.version;
-            statusEl.className = 'status live';
-
-            if (entry.repository) {
-              var link = document.createElement('p');
-              link.className = 'record-link';
-              var a = document.createElement('a');
-              a.href = 'https://github.com/MAGENAIS/' + entry.repository;
-              a.textContent = 'View repository';
-              link.appendChild(a);
-              record.appendChild(link);
-            }
-          });
-        })
-        .catch(function () { /* silent fallback to static markup */ });
-    })();
-  </script>
-
+<header class="hero">
+<div class="wrap">
+<p class="kicker"><a href="https://github.com/MAGENAIS">MAGENAIS</a> / Models</p>
+<h1>A catalog of models you can run without the platform they came from.</h1>
+<p class="lede">Each model below is its own independent, open-source repository — clone it, read it, run it on its own. The MAGENAIS platform is one consumer of this catalog, not the only way in.</p>
+<p class="lede">No API key, no account, and no cloud service is required to run any of them.</p>
+</div>
+</header>
+<main>
+<div class="wrap">
+<section id="models">
+<h2>Models</h2>
+<p class="section-note">
+A model is listed here as <strong>published</strong> once it has a
+tagged, tested release in its own repository — not while it's
+still being built. Until then, it appears with its planned status
+so you can see what's coming.
+</p>
+<ul class="records" id="records">
+<!-- Populated by renderRecords() below; this static markup is the no-JS / fetch-failure fallback. -->
+<li>
+<div class="record">
+<div class="record-head">
+<div>
+<p class="record-id">magenais.decision-score</p>
+<p class="record-name">DecisionScore</p>
+</div>
+<span class="status dev">in development</span>
+</div>
+<p class="record-desc">Explainable multi-criteria decision intelligence: ranks options against weighted criteria, and reports a Decision Stability Index and Decision Flip Point for how confident that ranking is.</p>
+<dl class="meta">
+<div><dt>License</dt><dd>Apache-2.0</dd></div>
+<div><dt>Type</dt><dd>algorithm</dd></div>
+<div><dt>Trust</dt><dd>experimental</dd></div>
+</dl>
+</div>
+</li>
+<li>
+<div class="record">
+<div class="record-head">
+<div>
+<p class="record-id">magenais.pattern-sense</p>
+<p class="record-name">PatternSense</p>
+</div>
+<span class="status planned">planned</span>
+</div>
+<p class="record-desc">Discovers and quantifies patterns in structured data, distinguishing association from correlation from causal hypothesis, with a Pattern Transfer Score for cross-partition consistency.</p>
+</div>
+</li>
+<li>
+<div class="record">
+<div class="record-head">
+<div>
+<p class="record-id">magenais.anomaly-mind</p>
+<p class="record-name">AnomalyMind</p>
+</div>
+<span class="status planned">planned</span>
+</div>
+<p class="record-desc">Lightweight, local, explainable anomaly detection over tabular and time-series data, with an Anomaly Context Stability score distinguishing threshold-sensitive anomalies from stable ones.</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="resources">
+<h2>For developers</h2>
+<p class="section-note">The catalog and its schemas are plain files — read them directly, or point your own tooling at them.</p>
+<ul class="resources">
+<li>
+<a href="./catalog/models.json">catalog/models.json</a>
+<span>Machine-readable list of published models</span>
+</li>
+<li>
+<a href="./schemas/model-manifest.schema.json">model-manifest.schema.json</a>
+<span>What a model publishes about itself</span>
+</li>
+<li>
+<a href="./schemas/model-response.schema.json">model-response.schema.json</a>
+<span>What a model returns when run</span>
+</li>
+<li>
+<a href="https://github.com/MAGENAIS/MAGENAIS-MODELS">Source on GitHub</a>
+<span>Contributions welcome — see CONTRIBUTING.md</span>
+</li>
+</ul>
+</section>
+</div>
+</main>
+<footer>
+<div class="wrap">
+<p>Catalog metadata and schemas are Apache-2.0 licensed. Each model repository carries its own license. MAGENAIS Core, the platform that consumes this catalog, is separate and proprietary — this catalog does not depend on it, and neither does any model listed here.</p>
+</div>
+</footer>
+<script>
+// Progressive enhancement: try to load the live catalog and upgrade any
+// matching static record to "published" with a real version + link.
+// If this fails (offline, opened via file://, catalog still empty),
+// the static markup above stands as-is — no error is shown to the reader.
+(function () {
+fetch('./catalog/models.json', { cache: 'no-store' })
+.then(function (res) { return res.ok ? res.json() : []; })
+.then(function (published) {
+if (!Array.isArray(published) || published.length === 0) return;
+published.forEach(function (entry) {
+var row = document.querySelector('.record-id')
+? Array.prototype.find.call(
+document.querySelectorAll('.record-id'),
+function (el) { return el.textContent.trim() === entry.id; }
+)
+: null;
+if (!row) return;
+var record = row.closest('.record');
+var statusEl = record.querySelector('.status');
+statusEl.textContent = 'published ' + entry.version;
+statusEl.className = 'status live';
+if (entry.repository) {
+var link = document.createElement('p');
+link.className = 'record-link';
+var a = document.createElement('a');
+a.href = entry.repository;
+a.textContent = 'View repository';
+link.appendChild(a);
+record.appendChild(link);
+}
+});
+})
+.catch(function () { /* silent fallback to static markup */ });
+})();
+</script>
 </body>
 </html>

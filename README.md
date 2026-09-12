@@ -3,61 +3,124 @@
 Official catalog and discovery index for **MAGENAIS Models** — a set of
 independent, open-source, research-oriented models that can be used on
 their own or discovered and run through the [MAGENAIS](https://github.com/MAGENAIS)
-Model Hub.
+Models Zoo.
 
-This repository does not contain model source code. Each model is its own
-independently versioned, independently usable repository:
+This repository contains **no model algorithm code**. It is a directory:
+metadata, manifests, and schemas that describe where each model lives and
+how to interpret its inputs/outputs.
 
-| Model | Repository | Status |
+```
+MAGENAIS-MODELS               (you are here — catalog only)
+  │
+  ├── MAGENAIS-MODEL-DECISION-SCORE   (independent repo, own releases)
+  ├── MAGENAIS-MODEL-PATTERN-SENSE    (independent repo, own releases)
+  └── MAGENAIS-MODEL-ANOMALY-MIND     (independent repo, own releases)
+```
+
+Each model above is a fully independent, standalone open-source project.
+You can clone, install, test, and run any of them **without installing
+MAGENAIS**. MAGENAIS itself is one consumer of this catalog among
+potentially many.
+
+## Why a separate catalog repository?
+
+- Each model has independent versioning, releases, contributors, and
+  licensing.
+- This repo stays lightweight: pure JSON + Markdown, no build step, no
+  runtime dependencies.
+- Anyone — MAGENAIS or a third-party tool — can read `catalog/models.json`
+  to discover what models exist, without needing to know anything about
+  MAGENAIS internals.
+
+## Catalog
+
+The machine-readable catalog is [`catalog/models.json`](./catalog/models.json).
+**It is currently an empty array `[]`** — no model repository has been
+published yet. An entry is added here only once its independent
+repository actually exists on GitHub and has a tagged release (see
+[`catalog/models.example.json`](./catalog/models.example.json) for the
+exact shape an entry takes, and [CONTRIBUTING.md](./CONTRIBUTING.md) for
+how entries get added).
+
+Roadmap (not yet in `catalog/models.json`):
+
+| Model | ID | Status |
 |---|---|---|
-| DecisionScore | [MAGENAIS-MODEL-DECISION-SCORE](https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE) | In development — not yet published |
-| PatternSense | MAGENAIS-MODEL-PATTERN-SENSE | Planned |
-| AnomalyMind | MAGENAIS-MODEL-ANOMALY-MIND | Planned |
+| DecisionScore | `magenais.decision-score` | Implemented, not yet published (repository prepared, GitHub publish pending) |
+| PatternSense | `magenais.pattern-sense` | Not yet implemented |
+| AnomalyMind | `magenais.anomaly-mind` | Not yet implemented |
 
-See [`index.html`](./index.html) (published via GitHub Pages) for a
-browsable version of this table, or [`catalog/models.json`](./catalog/models.json)
-for the machine-readable version consumed by MAGENAIS's Model Hub.
+*"Trust: experimental" means the model has not yet completed MAGENAIS's
+verification process — see [Trust Levels](#trust-levels) below. It does
+not mean the model is untested; each model repository has its own test
+suite (see its README).*
 
-## What's in this repository
+## Schemas
 
-```
-catalog/
-  models.json                 Machine-readable catalog. Empty until a model publishes a v1.0.0 release.
-schemas/
-  model-manifest.schema.json  JSON Schema for a model's metadata (id, capabilities, license, trust, ...)
-  model-response.schema.json  JSON Schema for what a model returns when run
-index.html                    GitHub Pages landing page for this catalog
-```
+- [`schemas/model-manifest.schema.json`](./schemas/model-manifest.schema.json) —
+  the shape every model's `model.json` manifest must satisfy.
+- [`schemas/model-response.schema.json`](./schemas/model-response.schema.json) —
+  the shape every model's runtime output is normalized to.
 
-## Why the catalog starts empty
-
-A model is only added to `catalog/models.json` once its own repository has
-a tagged, tested, documented `v1.0.0` release — not while it's still being
-built. This keeps the catalog trustworthy: every entry in it is something
-you can actually clone and run today. Track upcoming models in the table
-above or on the [website](./index.html) instead.
+These mirror the `ModelManifest` and `ModelResponse` TypeScript contracts
+used internally by MAGENAIS, published here so any independent consumer
+(not just MAGENAIS) can validate against the same contract.
 
 ## Trust levels
 
-Entries in the catalog carry one of:
+```
+magenais-verified     — passed MAGENAIS's manifest, security, and
+                         reproducibility verification process
+community-verified    — reviewed and vouched for by the community,
+                         not by MAGENAIS directly
+experimental          — functional, tested by its own author, not yet
+                         independently verified
+unverified            — listed for discovery only, use at your own risk
+```
 
-- `magenais-verified` — passed MAGENAIS's own verification process
-- `community-verified` — verified by community review
-- `experimental` — working, but not yet verified
-- `unverified` — use at your own risk
+## Using a model without MAGENAIS
+
+*(Example below shows the intended flow for DecisionScore once its
+repository is published — see the roadmap table above for current
+status.)*
+
+Every entry in the catalog links to an independent repository with its
+own README, tests, and examples. Clone it directly:
+
+```bash
+git clone https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE.git
+cd MAGENAIS-MODEL-DECISION-SCORE
+npm test
+node examples/basic-usage.mjs
+```
+
+No MAGENAIS installation, account, API key, or network access is required
+for any model currently listed here.
+
+## Using a model through MAGENAIS
+
+Inside MAGENAIS, open the **Models Zoo** tab to search, filter, and run
+any listed model. MAGENAIS's `ModelRegistry`/`ModelRouter` consume this
+catalog's manifests to make discovery and execution uniform across
+models, regardless of which model repository they came from.
+
+## Contributing / proposing a new model
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md). New model listings go through a
+manifest-validation and security review before being added to
+`catalog/models.json` — see [SECURITY.md](./SECURITY.md).
 
 ## License
 
-This repository (catalog metadata and schemas) is licensed under
-Apache-2.0 — see `LICENSE`. Each model repository has its own license,
-shown in its own manifest; MAGENAIS Core (the private platform that
-consumes this catalog) has a separate, proprietary license and is not
-part of this repository or this license.
+This catalog's own content (schemas, `models.json`, documentation) is
+licensed under [Apache-2.0](./LICENSE). Each listed model has its own
+license, shown in its `catalog/models.json` entry and its own repository
+— check there before use.
 
-## Contributing
+## Relationship to MAGENAIS Core
 
-See `CONTRIBUTING.md`.
-
-## Security
-
-See `SECURITY.md`.
+MAGENAIS Core (the closed-source proprietary application) is **not** part
+of this repository and is not published here or anywhere public. This
+catalog, and every model repository it lists, is fully independent of
+MAGENAIS Core's proprietary source. MAGENAIS Core is simply one of
+potentially many consumers of the open models listed here.

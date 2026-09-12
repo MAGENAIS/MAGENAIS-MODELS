@@ -1,52 +1,49 @@
 # Contributing to MAGENAIS-MODELS
 
-This repository is the catalog and discovery index for MAGENAIS Models —
-it does not contain model source code. If you want to contribute a model
-implementation, contribute to that model's own repository instead (see the
-table in `README.md`).
+This repository is a **catalog**, not a place for model source code.
+There are two kinds of contributions here:
 
-## What you can contribute here
+1. Improving the catalog infrastructure itself (schemas, docs, tooling).
+2. Proposing a new model listing (which lives in its **own** repository —
+   only its manifest entry is added here).
 
-- **Corrections to `catalog/models.json`** — e.g. a broken repository
-  link, a stale version number, an incorrect license or trust level for an
-  already-published model.
-- **Schema improvements** — proposals to `schemas/model-manifest.schema.json`
-  or `schemas/model-response.schema.json`, if a field is missing or
-  ambiguous for real-world models.
-- **`index.html` improvements** — the GitHub Pages landing page.
+## Improving the catalog
 
-## Adding a new model to the catalog
+```bash
+git clone https://github.com/MAGENAIS/MAGENAIS-MODELS.git
+cd MAGENAIS-MODELS
+```
 
-A model is added to `catalog/models.json` only once, by whoever maintains
-this repository, and only after:
+Edit `README.md`, `schemas/*.json`, or `SECURITY.md`/`CONTRIBUTING.md` as
+needed and open a pull request. Since there is no build step, please
+double-check any JSON you touch with a formatter/validator before
+submitting (e.g. `python -m json.tool catalog/models.json`).
 
-1. The model has its own public repository with a tagged `v1.0.0` (or
-   later) release.
-2. It has passing tests, a `LICENSE`, a `SECURITY.md`, and documentation.
-3. Its `model.json` manifest validates against
-   `schemas/model-manifest.schema.json`.
+## Proposing a new model listing
 
-If you've built a model you'd like listed, open an issue linking to your
-repository and its release — don't open a PR editing `catalog/models.json`
-directly, since listing requires review of the model repository itself
-first.
+1. Your model must live in its own independent, public, open-source
+   repository, following the structure MAGENAIS models use:
+   `README.md`, `LICENSE`, `SECURITY.md`, `CONTRIBUTING.md`,
+   `CHANGELOG.md`, `model.json`, `src/`, `tests/`, `examples/`, `docs/`.
+2. Your `model.json` must validate against
+   [`schemas/model-manifest.schema.json`](./schemas/model-manifest.schema.json).
+3. Your model's runtime output must validate against
+   [`schemas/model-response.schema.json`](./schemas/model-response.schema.json).
+4. Open a pull request here adding **one entry** to
+   `catalog/models.json` pointing to your repository, with `trust` set
+   to `"unverified"` (MAGENAIS maintainers will update this after
+   review — you should not set `magenais-verified` or
+   `community-verified` yourself).
+5. A maintainer will validate the manifest, do a basic security review
+   (no arbitrary code execution paths, no obfuscated code, license
+   matches what's declared), and merge if everything checks out.
 
-## Schema changes
+## What will NOT be accepted
 
-Because `schemas/model-manifest.schema.json` and
-`schemas/model-response.schema.json` mirror MAGENAIS's own internal
-TypeScript contract (`src/models/types/ModelManifest.ts` and
-`ModelResponse.ts`), a schema change here should be proposed alongside (or
-after discussion with) that project — the two are meant to never drift
-out of sync.
-
-## Pull requests
-
-1. Fork and branch from `main`.
-2. Validate any `catalog/models.json` change against its schema before
-   opening a PR.
-3. Describe the change and why it's needed.
-
-## Code of Conduct
-
-Be respectful and constructive.
+- Listings for repositories that require a mandatory paid account, API
+  key, or cloud service just to run their published examples, unless
+  clearly and honestly marked with `"pricing": {"type": "paid"}` (or
+  `"enterprise"`) in the manifest.
+- Listings that ship obfuscated or minified-only source with no readable
+  original.
+- Duplicate listings for the same model under a different name.
