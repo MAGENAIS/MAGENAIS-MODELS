@@ -3,7 +3,7 @@
 Official catalog and discovery index for **MAGENAIS Models** — a set of
 independent, open-source, research-oriented models that can be used on
 their own or discovered and run through the [MAGENAIS](https://github.com/MAGENAIS)
-Models Zoo.
+Model Hub.
 
 This repository does not contain model source code. Each model is its own
 independently versioned, independently usable repository:
@@ -16,7 +16,7 @@ independently versioned, independently usable repository:
 
 See [`index.html`](./index.html) (published via GitHub Pages) for a
 browsable version of this table, or [`catalog/models.json`](./catalog/models.json)
-for the machine-readable version consumed by MAGENAIS's Models Zoo.
+for the machine-readable version consumed by MAGENAIS's Model Hub.
 
 ## What's in this repository
 
