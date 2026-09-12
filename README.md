@@ -3,7 +3,7 @@
 Official catalog and discovery index for **MAGENAIS Models** — a set of
 independent, open-source, research-oriented models that can be used on
 their own or discovered and run through the [MAGENAIS](https://github.com/MAGENAIS)
-Models Zoo.
+Model Hub.
 
 This repository contains **no model algorithm code**. It is a directory:
 metadata, manifests, and schemas that describe where each model lives and
@@ -99,7 +99,7 @@ for any model currently listed here.
 
 ## Using a model through MAGENAIS
 
-Inside MAGENAIS, open the **Models Zoo** tab to search, filter, and run
+Inside MAGENAIS, open the **Model Hub** tab to search, filter, and run
 any listed model. MAGENAIS's `ModelRegistry`/`ModelRouter` consume this
 catalog's manifests to make discovery and execution uniform across
 models, regardless of which model repository they came from.

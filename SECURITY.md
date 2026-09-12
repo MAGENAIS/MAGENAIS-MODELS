@@ -16,7 +16,7 @@ and no runtime here. The security-relevant surface is limited to:
 - It does not download, execute, `eval()`, or otherwise run any code from
   any listed repository. Discovery and installation are always explicit,
   user-initiated actions in the consuming application (e.g. MAGENAIS's
-  Models Zoo), never automatic.
+  Model Hub), never automatic.
 - It does not host binaries, model weights, or executable artifacts.
 
 ## Trust levels
