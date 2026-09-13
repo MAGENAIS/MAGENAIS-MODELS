@@ -35,20 +35,20 @@ potentially many.
 ## Catalog
 
 The machine-readable catalog is [`catalog/models.json`](./catalog/models.json).
-**It is currently an empty array `[]`** — no model repository has been
-published yet. An entry is added here only once its independent
-repository actually exists on GitHub and has a tagged release (see
-[`catalog/models.example.json`](./catalog/models.example.json) for the
-exact shape an entry takes, and [CONTRIBUTING.md](./CONTRIBUTING.md) for
-how entries get added).
+It currently lists **two** published, independently-usable models —
+DecisionScore and PatternSense. An entry is added here only once its
+independent repository actually exists on GitHub and has a tagged
+release (see [`catalog/models.example.json`](./catalog/models.example.json)
+for the exact shape an entry takes, and [CONTRIBUTING.md](./CONTRIBUTING.md)
+for how entries get added).
 
-Roadmap (not yet in `catalog/models.json`):
+Roadmap:
 
 | Model | ID | Status |
 |---|---|---|
-| DecisionScore | `magenais.decision-score` | Implemented, not yet published (repository prepared, GitHub publish pending) |
-| PatternSense | `magenais.pattern-sense` | Not yet implemented |
-| AnomalyMind | `magenais.anomaly-mind` | Not yet implemented |
+| DecisionScore | `magenais.decision-score` | **Published**, `v1.0.0` — [repository](https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE) |
+| PatternSense | `magenais.pattern-sense` | **Published**, `v1.0.0` — [repository](https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE) |
+| AnomalyMind | `magenais.anomaly-mind` | In development — source pushed to a public [repository](https://github.com/MAGENAIS/MAGENAIS-MODEL-ANOMALY-MIND), not yet tagged/released |
 
 *"Trust: experimental" means the model has not yet completed MAGENAIS's
 verification process — see [Trust Levels](#trust-levels) below. It does
@@ -80,16 +80,19 @@ unverified            — listed for discovery only, use at your own risk
 
 ## Using a model without MAGENAIS
 
-*(Example below shows the intended flow for DecisionScore once its
-repository is published — see the roadmap table above for current
-status.)*
-
 Every entry in the catalog links to an independent repository with its
-own README, tests, and examples. Clone it directly:
+own README, tests, and examples. Clone either one directly:
 
 ```bash
 git clone https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE.git
 cd MAGENAIS-MODEL-DECISION-SCORE
+npm test
+node examples/basic-usage.mjs
+```
+
+```bash
+git clone https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE.git
+cd MAGENAIS-MODEL-PATTERN-SENSE
 npm test
 node examples/basic-usage.mjs
 ```

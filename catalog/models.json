@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "id": "magenais.decision-score",
+    "name": "DecisionScore",
+    "version": "1.0.0",
+    "description": "Explainable multi-criteria decision intelligence: ranks options against weighted criteria and reports how stable that ranking is (Decision Stability Index) and how much a weight would need to change to flip it (Decision Flip Point).",
+    "author": { "name": "MAGENAIS", "organization": "MAGENAIS" },
+    "type": "algorithm",
+    "capabilities": ["decision-ranking", "sensitivity-analysis"],
+    "runtimes": ["builtin-local"],
+    "repository": "https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE",
+    "license": { "type": "Apache-2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0" },
+    "pricing": { "type": "free" },
+    "trust": "experimental",
+    "uri": "magenais://decision-score@1.0.0",
+    "documentation": "https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE#readme"
+  },
+  {
+    "id": "magenais.pattern-sense",
+    "name": "PatternSense",
+    "version": "1.0.0",
+    "description": "Discovers and quantifies patterns in structured/tabular data: pairwise correlations and categorical associations, each reported with a Pattern Transfer Score (PTS) measuring how consistently the pattern holds across independent partitions of the data. Distinguishes association, correlation, temporal relationships, and (caller-hypothesized) causal-hypothesis pairs — never claims correlation proves causation.",
+    "author": { "name": "MAGENAIS", "organization": "MAGENAIS" },
+    "type": "algorithm",
+    "capabilities": ["pattern-detection", "correlation-analysis", "time-series-analysis"],
+    "runtimes": ["builtin-local"],
+    "repository": "https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE",
+    "license": { "type": "Apache-2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0" },
+    "pricing": { "type": "free" },
+    "trust": "experimental",
+    "uri": "magenais://pattern-sense@1.0.0",
+    "documentation": "https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE#readme"
+  }
+]

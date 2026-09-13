@@ -180,9 +180,11 @@ body { font-size: 16px; }
 <h2>Models</h2>
 <p class="section-note">
 A model is listed here as <strong>published</strong> once it has a
-tagged, tested release in its own repository — not while it's
-still being built. Until then, it appears with its planned status
-so you can see what's coming.
+tagged, tested release in its own repository. A model whose source is
+already public but not yet tagged/released appears as
+<strong>in development</strong>, with a link to its repository. Anything
+with no repository yet appears as <strong>planned</strong>, so you can
+see what's coming.
 </p>
 <ul class="records" id="records">
 <!-- Populated by renderRecords() below; this static markup is the no-JS / fetch-failure fallback. -->
@@ -193,7 +195,7 @@ so you can see what's coming.
 <p class="record-id">magenais.decision-score</p>
 <p class="record-name">DecisionScore</p>
 </div>
-<span class="status dev">in development</span>
+<span class="status live">published — v1.0.0</span>
 </div>
 <p class="record-desc">Explainable multi-criteria decision intelligence: ranks options against weighted criteria, and reports a Decision Stability Index and Decision Flip Point for how confident that ranking is.</p>
 <dl class="meta">
@@ -210,9 +212,14 @@ so you can see what's coming.
 <p class="record-id">magenais.pattern-sense</p>
 <p class="record-name">PatternSense</p>
 </div>
-<span class="status planned">planned</span>
+<span class="status live">published — v1.0.0</span>
 </div>
 <p class="record-desc">Discovers and quantifies patterns in structured data, distinguishing association from correlation from causal hypothesis, with a Pattern Transfer Score for cross-partition consistency.</p>
+<dl class="meta">
+<div><dt>License</dt><dd>Apache-2.0</dd></div>
+<div><dt>Type</dt><dd>algorithm</dd></div>
+<div><dt>Trust</dt><dd>experimental</dd></div>
+</dl>
 </div>
 </li>
 <li>
@@ -222,9 +229,15 @@ so you can see what's coming.
 <p class="record-id">magenais.anomaly-mind</p>
 <p class="record-name">AnomalyMind</p>
 </div>
-<span class="status planned">planned</span>
+<span class="status dev">in development</span>
 </div>
 <p class="record-desc">Lightweight, local, explainable anomaly detection over tabular and time-series data, with an Anomaly Context Stability score distinguishing threshold-sensitive anomalies from stable ones.</p>
+<dl class="meta">
+<div><dt>License</dt><dd>Apache-2.0</dd></div>
+<div><dt>Type</dt><dd>algorithm</dd></div>
+<div><dt>Trust</dt><dd>experimental</dd></div>
+</dl>
+<p class="record-link"><a href="https://github.com/MAGENAIS/MAGENAIS-MODEL-ANOMALY-MIND">View repository</a> — source is public; not yet tagged/released</p>
 </div>
 </li>
 </ul>
