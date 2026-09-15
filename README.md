@@ -48,7 +48,7 @@ Roadmap:
 |---|---|---|
 | DecisionScore | `magenais.decision-score` | **Published**, `v1.0.0` — [repository](https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE) |
 | PatternSense | `magenais.pattern-sense` | **Published**, `v1.0.0` — [repository](https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE) |
-| AnomalyMind | `magenais.anomaly-mind` | In development — source pushed to a public [repository](https://github.com/MAGENAIS/MAGENAIS-MODEL-ANOMALY-MIND), not yet tagged/released |
+| AnomalyMind | `magenais.anomaly-mind` | Not yet implemented |
 
 *"Trust: experimental" means the model has not yet completed MAGENAIS's
 verification process — see [Trust Levels](#trust-levels) below. It does

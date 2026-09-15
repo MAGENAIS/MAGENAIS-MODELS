@@ -7,305 +7,558 @@
 <meta name="description" content="MAGENAIS Models is a catalog of independent, open-source, research-oriented models. Usable on their own, or through the MAGENAIS platform." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
 :root {
---paper: #E9EDEC;
---paper-raised: #F3F5F4;
---ink: #171D1C;
---ink-soft: #454F4D;
---rule: #C7CFCD;
---accent: #1F6F78;
---accent-ink: #0F3E43;
---status-dev: #A9784F;
---status-planned: #6B7674;
---status-live: #1F6F78;
---serif: "Source Serif 4", Georgia, "Times New Roman", serif;
---mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --navy: #0B1220;
+  --navy-2: #121B2E;
+  --navy-soft: #1B2842;
+  --paper: #FAFAF8;
+  --surface: #FFFFFF;
+  --surface-2: #F3F4F2;
+  --border: #E4E3DE;
+  --ink: #14181A;
+  --ink-soft: #5A6260;
+  --ink-faint: #8A928F;
+  --gold: #C9973F;
+  --gold-ink: #7A5A1E;
+  --teal: #1F6F78;
+  --ok: #1F6F78;
+  --dev: #A9784F;
+  --planned: #6B7674;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --head: "Space Grotesk", var(--sans);
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(15,20,20,.06), 0 1px 1px rgba(15,20,20,.04);
+  --shadow-md: 0 8px 24px rgba(15,20,20,.08), 0 2px 6px rgba(15,20,20,.05);
 }
 * { box-sizing: border-box; }
-html { color-scheme: light; }
+html { color-scheme: light; scroll-behavior: smooth; }
 body {
-margin: 0;
-background: var(--paper);
-color: var(--ink);
-font-family: var(--serif);
-font-size: 17px;
-line-height: 1.55;
--webkit-font-smoothing: antialiased;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
 }
-a { color: var(--accent-ink); text-decoration-thickness: 1px; text-underline-offset: 2px; }
-a:hover { color: var(--accent); }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.wrap {
-max-width: 760px;
-margin: 0 auto;
-padding: 0 24px;
+a { color: var(--gold-ink); text-decoration: none; }
+a:hover { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 3px; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+h1, h2, h3 { font-family: var(--head); font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+
+/* ---- Top nav ---- */
+.topnav {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(11,18,32,.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
+.navwrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { display: flex; align-items: baseline; gap: 8px; color: #F4F2EC; font-family: var(--head); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.01em; }
+.brand:hover { color: #F4F2EC; text-decoration: none; }
+.brand-mark { color: var(--gold); }
+.brand-sub { font-family: var(--mono); font-weight: 500; font-size: 0.7rem; color: #9AA5B5; letter-spacing: 0.08em; text-transform: uppercase; padding-left: 6px; border-left: 1px solid rgba(255,255,255,.18); }
+.navlinks { display: flex; gap: 26px; }
+.navlinks a { color: #C9CFDA; font-size: 0.92rem; font-weight: 500; margin-left: 26px; }
+.navlinks a:first-child { margin-left: 0; }
+.navlinks a:hover { color: #fff; text-decoration: none; }
+.navlinks a.is-active { color: var(--gold); }
+
+/* ---- Hero ---- */
 header.hero {
-padding: 72px 0 40px;
-border-bottom: 1px solid var(--rule);
+  background:
+    radial-gradient(1100px 420px at 85% -10%, rgba(201,151,63,.20), transparent 60%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: #F4F2EC;
+  padding: 64px 0 56px;
 }
-.kicker {
-font-family: var(--mono);
-font-size: 13px;
-color: var(--ink-soft);
-margin: 0 0 18px;
+.breadcrumb { font-family: var(--mono); font-size: 12.5px; color: #9AA5B5; margin: 0 0 22px; letter-spacing: .01em; }
+.breadcrumb a { color: #9AA5B5; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb span { margin: 0 6px; color: #4C5768; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12.5px; color: #E7DCC4;
+  background: rgba(201,151,63,.12); border: 1px solid rgba(201,151,63,.35);
+  padding: 5px 12px; border-radius: 999px; margin: 0 0 20px;
 }
-.kicker a { color: var(--ink-soft); }
-h1 {
-font-size: clamp(2rem, 4.2vw, 2.85rem);
-line-height: 1.15;
-margin: 0 0 20px;
-font-weight: 600;
-max-width: 15ch;
+header.hero h1 { font-size: clamp(1.35rem, 2.1vw, 1.6rem); font-weight: 500; line-height: 1.32; margin: 0 0 18px; color: #C6CCD6; max-width: 46ch; }
+header.hero h1 .accent { color: var(--gold); }
+.lede { font-size: 1.15rem; color: #C6CCD6; max-width: 60ch; margin: 0 0 30px; font-weight: 400; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 34px; }
+.hero-actions .btn { margin: 0 12px 12px 0; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 8px; font-weight: 600; font-size: 0.94rem; border: 1px solid transparent; transition: transform .12s ease, box-shadow .12s ease; }
+.btn:hover { text-decoration: none; }
+.btn-primary { background: var(--gold); color: #241905; }
+.btn-primary:hover { background: #D9A94F; color: #241905; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(201,151,63,.35); }
+.btn-ghost { background: transparent; color: #F4F2EC; border-color: rgba(255,255,255,.28); }
+.btn-ghost:hover { background: rgba(255,255,255,.08); color: #fff; transform: translateY(-1px); }
+dl.badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+dl.badges div { display: flex; gap: 6px; align-items: center; font-family: var(--mono); font-size: 12.5px; color: #C6CCD6; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); padding: 6px 12px; border-radius: 7px; margin: 0 10px 10px 0; }
+dl.badges dt { color: #8C96A6; }
+dl.badges dt::after { content: ":"; }
+dl.badges dd { margin: 0; color: #F0EDE4; font-weight: 500; }
+
+/* ---- Main / cards ---- */
+main { padding: 56px 0 30px; }
+section + section { margin-top: 34px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 36px;
+  box-shadow: var(--shadow-sm);
 }
-.lede {
-font-size: 1.15rem;
-color: var(--ink-soft);
-max-width: 52ch;
-margin: 0 0 8px;
+.section-eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 8px; font-weight: 600; }
+h2 { font-size: 1.35rem; margin: 0 0 14px; }
+.section-note { color: var(--ink-soft); font-size: 0.98rem; max-width: 62ch; margin: 0 0 20px; }
+p.body-text { max-width: 68ch; margin: 0 0 14px; color: var(--ink); }
+p.body-text:last-child { margin-bottom: 0; }
+.disclaimer {
+  border-left: 3px solid var(--dev);
+  background: var(--surface-2);
+  padding: 12px 18px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  border-radius: 0 8px 8px 0;
+  margin-top: 18px;
 }
-.lede + .lede { margin-top: 12px; }
-main { padding: 48px 0 96px; }
-h2 {
-font-size: 1.05rem;
-font-weight: 600;
-margin: 0 0 6px;
+.terminal {
+  background: var(--navy);
+  color: #DCE7E5;
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 18px 0 0;
+  box-shadow: var(--shadow-md);
 }
-.section-note {
-color: var(--ink-soft);
-font-size: 0.98rem;
-max-width: 60ch;
-margin: 0 0 32px;
-}
-ul.records { list-style: none; margin: 0; padding: 0; }
+.terminal-bar { display: flex; gap: 6px; padding: 11px 14px; background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.08); }
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; background: #4C5768; }
+.terminal pre { margin: 0; padding: 20px 22px; overflow-x: auto; line-height: 1.65; }
+.terminal .muted { color: #7C8D89; }
+.terminal .accent { color: #E4C583; font-weight: 600; }
+table.ranking { border-collapse: collapse; width: 100%; margin: 4px 0 0; font-size: 0.92rem; }
+table.ranking th, table.ranking td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--border); }
+table.ranking th { font-family: var(--mono); font-weight: 600; color: var(--ink-soft); font-size: 0.74rem; text-transform: uppercase; letter-spacing: .05em; }
+table.ranking td.num { font-family: var(--mono); }
+table.ranking tr:last-child td { border-bottom: none; }
+ul.plain { list-style: none; padding: 0; margin: 0; max-width: 66ch; display: flex; flex-direction: column; gap: 12px; }
+ul.plain li { position: relative; padding-left: 24px; color: var(--ink); }
+ul.plain li::before { content: "—"; position: absolute; left: 0; color: var(--gold-ink); font-weight: 700; }
+code { font-family: var(--mono); background: var(--surface-2); padding: 1px 6px; border-radius: 4px; font-size: 0.88em; }
+.resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none; }
+.resources li { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease; }
+.resources li:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: #D9CBA3; }
+.resources a { font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.98rem; }
+.resources span { color: var(--ink-soft); font-size: 0.88rem; }
+
+/* ---- Catalog-specific record cards ---- */
+ul.records { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
 .record {
-border-top: 1px solid var(--rule);
-padding: 26px 0;
-display: grid;
-grid-template-columns: 1fr;
-gap: 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 26px 30px; box-shadow: var(--shadow-sm); transition: box-shadow .15s ease, border-color .15s ease;
 }
-ul.records li:last-child .record { border-bottom: 1px solid var(--rule); }
-.record-head {
-display: flex;
-align-items: baseline;
-justify-content: space-between;
-gap: 16px;
-flex-wrap: wrap;
-}
-.record-id {
-font-family: var(--mono);
-font-size: 0.82rem;
-color: var(--ink-soft);
-}
-.record-name {
-font-size: 1.25rem;
-font-weight: 600;
-margin: 2px 0 0;
-}
-.status {
-font-family: var(--mono);
-font-size: 0.78rem;
-padding: 3px 9px;
-border-radius: 3px;
-border: 1px solid currentColor;
-white-space: nowrap;
-align-self: flex-start;
-}
-.status.dev { color: var(--status-dev); }
-.status.planned { color: var(--status-planned); }
-.status.live { color: var(--status-live); }
-.record-desc {
-max-width: 62ch;
-color: var(--ink);
-}
-dl.meta {
-display: flex;
-flex-wrap: wrap;
-gap: 4px 28px;
-margin: 4px 0 0;
-font-size: 0.88rem;
-font-family: var(--mono);
-color: var(--ink-soft);
-}
-dl.meta div { display: flex; gap: 6px; }
+.record:hover { box-shadow: var(--shadow-md); border-color: #D9CBA3; }
+.record-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+.record-id { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); margin: 0 0 3px; }
+.record-name { font-size: 1.3rem; font-family: var(--head); font-weight: 600; margin: 0; }
+.status { font-family: var(--mono); font-size: 0.72rem; padding: 5px 11px; border-radius: 999px; white-space: nowrap; font-weight: 600; letter-spacing: .02em; }
+.status.live { color: #0E4B45; background: #DCEDE9; border: 1px solid #B7D9D1; }
+.status.dev { color: var(--dev); background: #F5EBDE; border: 1px solid #E3CDA9; }
+.status.planned { color: var(--planned); background: #EEEEEC; border: 1px solid #D8D8D5; }
+.record-desc { max-width: 66ch; color: var(--ink); margin: 0 0 14px; }
+dl.meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0 0 6px; font-size: 0.84rem; font-family: var(--mono); color: var(--ink-soft); }
+dl.meta div { display: flex; gap: 5px; margin-right: 22px; }
+dl.meta div:last-child { margin-right: 0; }
 dl.meta dt::after { content: ":"; }
 dl.meta dd { margin: 0; color: var(--ink); }
-.record-link { font-size: 0.95rem; }
-.empty-note {
-font-size: 0.9rem;
-color: var(--ink-soft);
-font-style: italic;
-margin-top: 4px;
+.record-link { font-size: 0.92rem; font-weight: 600; margin: 10px 0 0; }
+.empty-note { font-size: 0.88rem; color: var(--ink-faint); font-style: italic; margin-top: 4px; }
+
+/* ---- Footer ---- */
+footer { background: var(--navy); color: #C6CCD6; margin-top: 72px; }
+.footer-top { padding: 52px 0 36px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+.footer-brand-mark { font-family: var(--mono); font-weight: 700; font-size: 1.05rem; letter-spacing: .04em; margin: 0 0 10px; }
+.footer-brand-mark a { color: #F4F2EC; }
+.footer-brand-mark a:hover { color: #fff; text-decoration: none; }
+.footer-brand-mark .brand-mark { color: var(--gold); }
+.footer-blurb { font-size: 0.92rem; color: #9AA5B5; max-width: 34ch; margin: 0; }
+.footer-col h3 { font-family: var(--mono); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: #7C879A; margin: 0 0 14px; font-weight: 600; }
+.footer-col a { display: block; color: #C6CCD6; font-size: 0.92rem; margin-bottom: 10px; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding: 22px 0 40px; font-size: 0.84rem; color: #7C879A; }
+.footer-bottom p { margin: 0; max-width: 74ch; }
+
+@media (max-width: 720px) {
+  .footer-top { grid-template-columns: 1fr; gap: 26px; }
+  .navlinks { gap: 16px; }
+  .card { padding: 24px 22px; }
+  header.hero { padding: 44px 0 40px; }
+  main { padding: 40px 0 20px; }
 }
-section + section { margin-top: 56px; }
-.resources {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-gap: 18px 32px;
-padding: 0;
-margin: 0;
-list-style: none;
+@media (max-width: 480px) {
+  .navlinks a:not(.always-show) { display: none; }
 }
-.resources li { border-top: 1px solid var(--rule); padding-top: 14px; }
-.resources a { font-weight: 600; display: block; margin-bottom: 4px; }
-.resources span { color: var(--ink-soft); font-size: 0.92rem; }
-footer {
-border-top: 1px solid var(--rule);
-padding: 28px 0 56px;
-color: var(--ink-soft);
-font-size: 0.9rem;
+
+
+/* ============================================================
+   V2 — Header matched to the MAGENAIS app shell, bold model
+   name treatment, in-page document viewer, catalog grid.
+   ============================================================ */
+
+/* ---- Header: rebuilt to match the MAGENAIS app topbar ---- */
+.topnav {
+  background: #0B0C0C;
+  border-bottom: 1px solid rgba(255,255,255,.09);
 }
-footer a { color: var(--ink-soft); }
-@media (max-width: 520px) {
-header.hero { padding-top: 48px; }
-body { font-size: 16px; }
+.navwrap { display: flex; align-items: center; justify-content: space-between; height: auto; padding: 12px 0; }
+a.brand { display: flex; align-items: center; gap: 12px; }
+a.brand:hover { text-decoration: none; }
+.brand-logo { height: 36px; width: auto; object-fit: contain; filter: drop-shadow(0 1px 3px rgba(0,0,0,.5)); flex-shrink: 0; }
+.brand-text { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+.brand-text .mark {
+  font-family: var(--mono); font-weight: 700; font-size: 16.5px; letter-spacing: .05em;
+  color: #FBFAF6;
 }
+.brand-text .mark .accent { color: var(--gold); }
+.brand-text .tag {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: #9AA5B5; padding-top: 1px;
+}
+@media (max-width: 480px) { .brand-text .tag { display: none; } }
+
+/* ---- Bold model name, top of hero ---- */
+.model-name {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-family: var(--mono); font-weight: 700; letter-spacing: .01em;
+  font-size: clamp(2.3rem, 5vw, 3.2rem);
+  color: #FBFAF6; margin: 0 0 14px;
+}
+.model-name .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(201,151,63,.2); flex-shrink: 0; margin-right: 4px; }
+.model-name .pill {
+  font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .02em;
+  color: #E7DCC4; background: rgba(201,151,63,.14); border: 1px solid rgba(201,151,63,.35);
+  padding: 3px 10px; border-radius: 999px; text-transform: none; margin-left: 6px;
+}
+
+/* ---- In-page document viewer (replaces navigating to a raw file) ---- */
+[data-doc] { cursor: pointer; }
+.doc-modal-backdrop {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  background: rgba(6,8,10,.66); backdrop-filter: blur(3px);
+  align-items: flex-start; justify-content: center; padding: 6vh 20px;
+}
+.doc-modal-backdrop.open { display: flex; }
+.doc-modal {
+  background: var(--surface); width: 100%; max-width: 780px; max-height: 86vh;
+  border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 30px 70px rgba(0,0,0,.45);
+}
+.doc-modal-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 15px 22px; background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.doc-modal-head-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.doc-modal-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #9AA5B5; }
+.doc-modal-title { font-family: var(--mono); font-size: 14px; color: #FBFAF6; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.doc-modal-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.doc-modal-raw {
+  font-family: var(--mono); font-size: 11px; color: #C6CCD6; border: 1px solid rgba(255,255,255,.22);
+  border-radius: 6px; padding: 5px 10px; background: transparent;
+}
+.doc-modal-raw:hover { background: rgba(255,255,255,.08); color: #fff; text-decoration: none; }
+.doc-modal-close {
+  background: none; border: none; color: #C6CCD6; font-size: 20px; line-height: 1;
+  cursor: pointer; padding: 4px 9px; border-radius: 6px;
+}
+.doc-modal-close:hover { background: rgba(255,255,255,.1); color: #fff; }
+.doc-modal-body { padding: 26px 32px 36px; overflow-y: auto; font-size: .97rem; }
+.doc-modal-body h1, .doc-modal-body h2, .doc-modal-body h3 { font-family: var(--head); margin: 1.3em 0 .5em; }
+.doc-modal-body h1:first-child, .doc-modal-body h2:first-child, .doc-modal-body h3:first-child { margin-top: 0; }
+.doc-modal-body p { margin: 0 0 1em; color: var(--ink); }
+.doc-modal-body ul { margin: 0 0 1em; padding-left: 22px; }
+.doc-modal-body li { margin-bottom: .4em; }
+.doc-modal-body pre {
+  background: var(--navy); color: #DCE7E5; padding: 16px 18px; border-radius: 10px;
+  overflow-x: auto; font-family: var(--mono); font-size: .84rem; line-height: 1.6; margin: 0 0 1.2em;
+}
+.doc-modal-body pre code { background: none; padding: 0; color: inherit; }
+.doc-modal-body :not(pre) > code { font-family: var(--mono); background: var(--surface-2); padding: 1px 6px; border-radius: 4px; font-size: .88em; }
+.doc-modal-body a { color: var(--gold-ink); }
+.doc-modal-body table { border-collapse: collapse; width: 100%; margin: 0 0 1.2em; font-size: .88rem; }
+.doc-modal-body th, .doc-modal-body td { border: 1px solid var(--border); padding: 7px 11px; text-align: left; }
+.doc-modal-body th { background: var(--surface-2); font-family: var(--mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-soft); }
+.doc-modal-status { font-family: var(--mono); font-size: .86rem; color: var(--ink-faint); }
+@media (max-width: 640px) { .doc-modal-body { padding: 20px 20px 28px; } .doc-modal-backdrop { padding: 0; align-items: stretch; } .doc-modal { max-width: none; max-height: none; height: 100vh; border-radius: 0; } }
+
+/* ---- Catalog: professional grid of model cards ---- */
+ul.records.grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+  list-style: none; margin: 0; padding: 0;
+}
+ul.records.grid > li { display: flex; }
+ul.records.grid .record {
+  display: flex; flex-direction: column; width: 100%;
+  border-top: 3px solid var(--gold);
+  position: relative;
+}
+.record-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-soft) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-weight: 700; font-size: 16px; color: var(--gold);
+}
+.record-titles { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.record-name { font-size: 1.28rem; font-family: var(--head); font-weight: 700; margin: 0; color: var(--ink); }
+.record-id { font-family: var(--mono); font-size: .74rem; color: var(--ink-faint); margin: 1px 0 0; }
+.record-desc { flex-grow: 1; }
+.record-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
 </style>
 </head>
 <body>
+<nav class="topnav">
+<div class="wrap navwrap">
+<a class="brand" href="https://magenais.github.io/MAGENAIS-Public/"><img class="brand-logo" src="./assets/magenais-logo.png" alt="MAGENAIS" aria-hidden="true"><span class="brand-text"><span class="mark">MAGENAI<span class="accent">S</span></span><span class="tag">Model Catalog</span></span></a>
+<div class="navlinks">
+<a href="https://magenais.github.io/MAGENAIS-MODELS/" class="is-active">Models Hub</a><a href="https://github.com/MAGENAIS">GitHub</a>
+</div>
+</div>
+</nav>
 <header class="hero">
 <div class="wrap">
-<p class="kicker"><a href="https://github.com/MAGENAIS">MAGENAIS</a> / Models</p>
-<h1>A catalog of models you can run without the platform they came from.</h1>
-<p class="lede">Each model below is its own independent, open-source repository — clone it, read it, run it on its own. The MAGENAIS platform is one consumer of this catalog, not the only way in.</p>
-<p class="lede">No API key, no account, and no cloud service is required to run any of them.</p>
+<p class="breadcrumb"><a href="https://magenais.github.io/MAGENAIS-Public/">MAGENAIS</a><span>/</span>Models</p>
+<div class="model-name"><span class="dot"></span>MAGENAIS Models<span class="pill">3 published models &middot; 0 API key required</span></div>
+<h1>A catalog of models you can run <span class="accent">without the platform they came from.</span></h1>
+<p class="lede">Each model below is its own independent, open-source repository — clone it, read it, run it on its own. The MAGENAIS platform is one consumer of this catalog, not the only way in. No API key, no account, and no cloud service is required to run any of them.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="#models">Browse models</a>
+<a class="btn btn-ghost" href="https://github.com/MAGENAIS/MAGENAIS-MODELS">Source on GitHub</a>
+</div>
 </div>
 </header>
 <main>
 <div class="wrap">
+
 <section id="models">
+<p class="section-eyebrow">Catalog</p>
 <h2>Models</h2>
-<p class="section-note">
-A model is listed here as <strong>published</strong> once it has a
-tagged, tested release in its own repository. A model whose source is
-already public but not yet tagged/released appears as
-<strong>in development</strong>, with a link to its repository. Anything
-with no repository yet appears as <strong>planned</strong>, so you can
-see what's coming.
-</p>
-<ul class="records" id="records">
-<!-- Populated by renderRecords() below; this static markup is the no-JS / fetch-failure fallback. -->
+<p class="section-note">A model is listed here as <strong>published</strong> once it has a tagged, tested release in its own repository — not while it's still being built. Until then, it appears with its planned status so you can see what's coming.</p>
+<ul class="records grid" id="records">
+<!-- Populated by renderRecords() below; this static markup is the no-JS / fetch-failure fallback. It is kept in sync with catalog/models.json by hand, and the script below only ever upgrades a status/version, never regresses one. -->
 <li>
-<div class="record">
-<div class="record-head">
-<div>
-<p class="record-id">magenais.decision-score</p>
-<p class="record-name">DecisionScore</p>
-</div>
-<span class="status live">published — v1.0.0</span>
-</div>
+<div class="record" data-model-id="magenais.decision-score">
+<div class="record-head"><div class="record-titles"><div class="record-icon">DE</div><div><p class="record-name">DecisionScore</p><p class="record-id">magenais.decision-score</p></div></div><span class="status live">Published &middot; v1.0.0</span></div>
 <p class="record-desc">Explainable multi-criteria decision intelligence: ranks options against weighted criteria, and reports a Decision Stability Index and Decision Flip Point for how confident that ranking is.</p>
 <dl class="meta">
 <div><dt>License</dt><dd>Apache-2.0</dd></div>
 <div><dt>Type</dt><dd>algorithm</dd></div>
 <div><dt>Trust</dt><dd>experimental</dd></div>
 </dl>
+<p class="record-link record-foot"><a href="https://magenais.github.io/MAGENAIS-MODEL-DECISION-SCORE/">View model page &rarr;</a> &nbsp;&middot;&nbsp; <a href="https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE">View repository</a></p>
 </div>
 </li>
 <li>
-<div class="record">
-<div class="record-head">
-<div>
-<p class="record-id">magenais.pattern-sense</p>
-<p class="record-name">PatternSense</p>
-</div>
-<span class="status live">published — v1.0.0</span>
-</div>
+<div class="record" data-model-id="magenais.pattern-sense">
+<div class="record-head"><div class="record-titles"><div class="record-icon">PA</div><div><p class="record-name">PatternSense</p><p class="record-id">magenais.pattern-sense</p></div></div><span class="status live">Published &middot; v1.0.0</span></div>
 <p class="record-desc">Discovers and quantifies patterns in structured data, distinguishing association from correlation from causal hypothesis, with a Pattern Transfer Score for cross-partition consistency.</p>
 <dl class="meta">
 <div><dt>License</dt><dd>Apache-2.0</dd></div>
 <div><dt>Type</dt><dd>algorithm</dd></div>
 <div><dt>Trust</dt><dd>experimental</dd></div>
 </dl>
+<p class="record-link record-foot"><a href="https://magenais.github.io/MAGENAIS-MODEL-PATTERN-SENSE/">View model page &rarr;</a> &nbsp;&middot;&nbsp; <a href="https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE">View repository</a></p>
 </div>
 </li>
 <li>
-<div class="record">
-<div class="record-head">
-<div>
-<p class="record-id">magenais.anomaly-mind</p>
-<p class="record-name">AnomalyMind</p>
-</div>
-<span class="status dev">in development</span>
-</div>
+<div class="record" data-model-id="magenais.anomaly-mind">
+<div class="record-head"><div class="record-titles"><div class="record-icon">AN</div><div><p class="record-name">AnomalyMind</p><p class="record-id">magenais.anomaly-mind</p></div></div><span class="status live">Published &middot; v1.0.0</span></div>
 <p class="record-desc">Lightweight, local, explainable anomaly detection over tabular and time-series data, with an Anomaly Context Stability score distinguishing threshold-sensitive anomalies from stable ones.</p>
 <dl class="meta">
 <div><dt>License</dt><dd>Apache-2.0</dd></div>
 <div><dt>Type</dt><dd>algorithm</dd></div>
 <div><dt>Trust</dt><dd>experimental</dd></div>
 </dl>
-<p class="record-link"><a href="https://github.com/MAGENAIS/MAGENAIS-MODEL-ANOMALY-MIND">View repository</a> — source is public; not yet tagged/released</p>
+<p class="record-link record-foot"><a href="https://magenais.github.io/MAGENAIS-MODEL-ANOMALY-MIND/">View model page &rarr;</a> &nbsp;&middot;&nbsp; <a href="https://github.com/MAGENAIS/MAGENAIS-MODEL-ANOMALY-MIND">View repository</a></p>
 </div>
 </li>
 </ul>
 </section>
+
 <section id="resources">
+<p class="section-eyebrow">Build on it</p>
 <h2>For developers</h2>
 <p class="section-note">The catalog and its schemas are plain files — read them directly, or point your own tooling at them.</p>
 <ul class="resources">
-<li>
-<a href="./catalog/models.json">catalog/models.json</a>
-<span>Machine-readable list of published models</span>
-</li>
-<li>
-<a href="./schemas/model-manifest.schema.json">model-manifest.schema.json</a>
-<span>What a model publishes about itself</span>
-</li>
-<li>
-<a href="./schemas/model-response.schema.json">model-response.schema.json</a>
-<span>What a model returns when run</span>
-</li>
-<li>
-<a href="https://github.com/MAGENAIS/MAGENAIS-MODELS">Source on GitHub</a>
-<span>Contributions welcome — see CONTRIBUTING.md</span>
-</li>
+<li><a href="./catalog/models.json" data-doc data-doc-title="catalog/models.json">catalog/models.json</a><span>Machine-readable list of published models</span></li>
+<li><a href="./schemas/model-manifest.schema.json" data-doc data-doc-title="model-manifest.schema.json">model-manifest.schema.json</a><span>What a model publishes about itself</span></li>
+<li><a href="./schemas/model-response.schema.json" data-doc data-doc-title="model-response.schema.json">model-response.schema.json</a><span>What a model returns when run</span></li>
+<li><a href="https://github.com/MAGENAIS/MAGENAIS-MODELS">Source on GitHub</a><span>Contributions welcome — see CONTRIBUTING.md</span></li>
 </ul>
 </section>
+
 </div>
 </main>
 <footer>
-<div class="wrap">
-<p>Catalog metadata and schemas are Apache-2.0 licensed. Each model repository carries its own license. MAGENAIS Core, the platform that consumes this catalog, is separate and proprietary — this catalog does not depend on it, and neither does any model listed here.</p>
+<div class="wrap footer-top">
+<div>
+<p class="footer-brand-mark"><a href="https://magenais.github.io/MAGENAIS-Public/"><span class="brand-mark">M</span>AGENAIS Models</a></p>
+<p class="footer-blurb">A catalog of independent, open-source, research-oriented models. Runs locally — no API key, no account, no cloud service required.</p>
+</div>
+<div class="footer-col">
+<h3>MODELS</h3>
+<a href="./catalog/models.json" data-doc data-doc-title="catalog/models.json">models.json</a>
+<a href="./schemas/model-manifest.schema.json" data-doc data-doc-title="model-manifest.schema.json">Manifest schema</a>
+<a href="./schemas/model-response.schema.json" data-doc data-doc-title="model-response.schema.json">Response schema</a>
+<a href="https://github.com/MAGENAIS/MAGENAIS-MODELS/blob/main/LICENSE">License</a>
+</div>
+<div class="footer-col">
+<h3>MAGENAIS</h3>
+<a href="https://magenais.github.io/MAGENAIS-Public/">MAGENAIS App</a>
+<a href="https://magenais.github.io/MAGENAIS-MODELS/">Models catalog</a>
+<a href="https://github.com/MAGENAIS">GitHub organization</a>
+<a href="https://github.com/MAGENAIS/MAGENAIS-MODELS/blob/main/CONTRIBUTING.md">Contributing</a>
+</div>
+</div>
+<div class="wrap footer-bottom">
+<p>Apache-2.0 licensed. Independent of MAGENAIS Core, which is separate and proprietary — this package runs without it and depends on nothing from it.</p>
 </div>
 </footer>
 <script>
 // Progressive enhancement: try to load the live catalog and upgrade any
-// matching static record to "published" with a real version + link.
-// If this fails (offline, opened via file://, catalog still empty),
-// the static markup above stands as-is — no error is shown to the reader.
+// matching static record's status/version/link from catalog/models.json,
+// in case this static markup is ever stale relative to it. Matches on the
+// record's data-model-id (not fragile text-matching against a visible
+// label) so it can't silently pick the wrong row. If this fails (offline,
+// opened via file://, catalog temporarily unreachable), the static
+// markup above — which already reflects every model's real, current
+// status — stands as-is; no error is shown to the reader.
 (function () {
-fetch('./catalog/models.json', { cache: 'no-store' })
-.then(function (res) { return res.ok ? res.json() : []; })
-.then(function (published) {
-if (!Array.isArray(published) || published.length === 0) return;
-published.forEach(function (entry) {
-var row = document.querySelector('.record-id')
-? Array.prototype.find.call(
-document.querySelectorAll('.record-id'),
-function (el) { return el.textContent.trim() === entry.id; }
-)
-: null;
-if (!row) return;
-var record = row.closest('.record');
-var statusEl = record.querySelector('.status');
-statusEl.textContent = 'published ' + entry.version;
-statusEl.className = 'status live';
-if (entry.repository) {
-var link = document.createElement('p');
-link.className = 'record-link';
-var a = document.createElement('a');
-a.href = entry.repository;
-a.textContent = 'View repository';
-link.appendChild(a);
-record.appendChild(link);
-}
-});
-})
-.catch(function () { /* silent fallback to static markup */ });
+  fetch('./catalog/models.json', { cache: 'no-store' })
+    .then(function (res) { return res.ok ? res.json() : []; })
+    .then(function (published) {
+      if (!Array.isArray(published) || published.length === 0) return;
+      published.forEach(function (entry) {
+        var record = document.querySelector('.record[data-model-id="' + entry.id + '"]');
+        if (!record) return;
+        var statusEl = record.querySelector('.status');
+        statusEl.innerHTML = 'Published &middot; v' + entry.version;
+        statusEl.className = 'status live';
+      });
+    })
+    .catch(function () { /* silent fallback to static markup */ });
 })();
 </script>
+
+<script id="__doc_data__" type="application/json">{"./catalog/models.json": "[\n  {\n    \"id\": \"magenais.decision-score\",\n    \"name\": \"DecisionScore\",\n    \"version\": \"1.0.0\",\n    \"description\": \"Explainable multi-criteria decision intelligence: ranks options against weighted criteria and reports how stable that ranking is (Decision Stability Index) and how much a weight would need to change to flip it (Decision Flip Point).\",\n    \"author\": { \"name\": \"MAGENAIS\", \"organization\": \"MAGENAIS\" },\n    \"type\": \"algorithm\",\n    \"capabilities\": [\"decision-ranking\", \"sensitivity-analysis\"],\n    \"runtimes\": [\"builtin-local\"],\n    \"repository\": \"https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE\",\n    \"license\": { \"type\": \"Apache-2.0\", \"url\": \"https://www.apache.org/licenses/LICENSE-2.0\" },\n    \"pricing\": { \"type\": \"free\" },\n    \"trust\": \"experimental\",\n    \"uri\": \"magenais://decision-score@1.0.0\",\n    \"documentation\": \"https://github.com/MAGENAIS/MAGENAIS-MODEL-DECISION-SCORE#readme\"\n  },\n  {\n    \"id\": \"magenais.pattern-sense\",\n    \"name\": \"PatternSense\",\n    \"version\": \"1.0.0\",\n    \"description\": \"Discovers and quantifies patterns in structured/tabular data: pairwise correlations and categorical associations, each reported with a Pattern Transfer Score (PTS) measuring how consistently the pattern holds across independent partitions of the data. Distinguishes association, correlation, temporal relationships, and (caller-hypothesized) causal-hypothesis pairs — never claims correlation proves causation.\",\n    \"author\": { \"name\": \"MAGENAIS\", \"organization\": \"MAGENAIS\" },\n    \"type\": \"algorithm\",\n    \"capabilities\": [\"pattern-detection\", \"correlation-analysis\", \"time-series-analysis\"],\n    \"runtimes\": [\"builtin-local\"],\n    \"repository\": \"https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE\",\n    \"license\": { \"type\": \"Apache-2.0\", \"url\": \"https://www.apache.org/licenses/LICENSE-2.0\" },\n    \"pricing\": { \"type\": \"free\" },\n    \"trust\": \"experimental\",\n    \"uri\": \"magenais://pattern-sense@1.0.0\",\n    \"documentation\": \"https://github.com/MAGENAIS/MAGENAIS-MODEL-PATTERN-SENSE#readme\"\n  },\n  {\n    \"id\": \"magenais.anomaly-mind\",\n    \"name\": \"AnomalyMind\",\n    \"version\": \"1.0.0\",\n    \"description\": \"Lightweight, local, explainable anomaly detection over numeric tabular/time-series data. Flags outliers using simple, well-understood statistical methods (median absolute deviation, robust Z-score, IQR, rolling local statistics — no neural network) and reports an Anomaly Context Stability (ACS) score distinguishing a threshold-sensitive anomaly from one that holds up across tested threshold/window/method/subset variations.\",\n    \"author\": { \"name\": \"MAGENAIS\", \"organization\": \"MAGENAIS\" },\n    \"type\": \"algorithm\",\n    \"capabilities\": [\"anomaly-detection\", \"time-series-analysis\"],\n    \"runtimes\": [\"builtin-local\"],\n    \"repository\": \"https://github.com/MAGENAIS/MAGENAIS-MODEL-ANOMALY-MIND\",\n    \"license\": { \"type\": \"Apache-2.0\", \"url\": \"https://www.apache.org/licenses/LICENSE-2.0\" },\n    \"pricing\": { \"type\": \"free\" },\n    \"trust\": \"experimental\",\n    \"uri\": \"magenais://anomaly-mind@1.0.0\",\n    \"documentation\": \"https://github.com/MAGENAIS/MAGENAIS-MODEL-ANOMALY-MIND#readme\"\n  }\n]\n", "./schemas/model-manifest.schema.json": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"$id\": \"https://github.com/MAGENAIS/MAGENAIS-MODELS/schemas/model-manifest.schema.json\",\n  \"title\": \"MAGENAIS Model Manifest\",\n  \"description\": \"Static descriptive metadata every MAGENAIS model (built-in or externally installed) must satisfy. Mirrors the ModelManifest TypeScript interface used internally by MAGENAIS (MASTER PROMPT V4.1 §11).\",\n  \"type\": \"object\",\n  \"required\": [\n    \"id\",\n    \"name\",\n    \"version\",\n    \"description\",\n    \"author\",\n    \"type\",\n    \"capabilities\",\n    \"runtimes\",\n    \"license\",\n    \"pricing\",\n    \"trust\"\n  ],\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"id\": {\n      \"type\": \"string\",\n      \"description\": \"Stable identifier, independent of any GitHub URL. Convention: \\\"magenais.<kebab-case-name>\\\".\",\n      \"pattern\": \"^[a-z0-9]+(\\\\.[a-z0-9-]+)+$\",\n      \"examples\": [\"magenais.decision-score\"]\n    },\n    \"name\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"version\": {\n      \"type\": \"string\",\n      \"description\": \"Semantic version of the model itself, independent of MAGENAIS's own version.\",\n      \"pattern\": \"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+(-[0-9A-Za-z-.]+)?(\\\\+[0-9A-Za-z-.]+)?$\"\n    },\n    \"description\": {\n      \"type\": \"string\",\n      \"minLength\": 1\n    },\n    \"author\": {\n      \"type\": \"object\",\n      \"required\": [\"name\"],\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"name\": { \"type\": \"string\", \"minLength\": 1 },\n        \"organization\": { \"type\": \"string\" }\n      }\n    },\n    \"type\": {\n      \"type\": \"string\",\n      \"enum\": [\"algorithm\", \"ml\", \"llm\", \"vision\", \"audio\", \"graph\", \"hybrid\"]\n    },\n    \"capabilities\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" },\n      \"minItems\": 1\n    },\n    \"runtimes\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" },\n      \"minItems\": 1,\n      \"examples\": [[\"builtin-local\"], [\"api\"]]\n    },\n    \"license\": {\n      \"type\": \"object\",\n      \"required\": [\"type\"],\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"type\": {\n          \"type\": \"string\",\n          \"description\": \"SPDX identifier where possible, e.g. \\\"Apache-2.0\\\", \\\"MIT\\\".\",\n          \"examples\": [\"Apache-2.0\", \"MIT\"]\n        },\n        \"url\": { \"type\": \"string\", \"format\": \"uri\" }\n      }\n    },\n    \"pricing\": {\n      \"type\": \"object\",\n      \"required\": [\"type\"],\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"type\": {\n          \"type\": \"string\",\n          \"enum\": [\"free\", \"paid\", \"freemium\", \"enterprise\"]\n        }\n      }\n    },\n    \"trust\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"magenais-verified\",\n        \"community-verified\",\n        \"experimental\",\n        \"unverified\"\n      ]\n    },\n    \"uri\": {\n      \"type\": \"string\",\n      \"description\": \"Optional canonical URI form.\",\n      \"pattern\": \"^magenais://[a-z0-9-]+@\\\\d+\\\\.\\\\d+\\\\.\\\\d+$\",\n      \"examples\": [\"magenais://decision-score@1.0.0\"]\n    },\n    \"repository\": {\n      \"type\": \"string\",\n      \"description\": \"Optional link to the model's own repository, for display only — never used as its identity.\",\n      \"format\": \"uri\"\n    },\n    \"documentation\": {\n      \"type\": \"string\",\n      \"format\": \"uri\"\n    },\n    \"artifact\": {\n      \"type\": \"object\",\n      \"description\": \"Present only on an entry for a model installed from an external artifact rather than one built into MAGENAIS. Added in Phase 16 (Installer/Catalog Foundation, MASTER PROMPT V4.1 §32-34); none of the three initial models set this.\",\n      \"required\": [\"url\", \"checksum\"],\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"url\": { \"type\": \"string\", \"format\": \"uri\" },\n        \"checksum\": {\n          \"type\": \"object\",\n          \"required\": [\"algorithm\", \"value\"],\n          \"additionalProperties\": false,\n          \"properties\": {\n            \"algorithm\": { \"type\": \"string\", \"enum\": [\"sha256\"] },\n            \"value\": {\n              \"type\": \"string\",\n              \"description\": \"Lowercase hex-encoded digest.\",\n              \"pattern\": \"^[0-9a-f]+$\"\n            }\n          }\n        },\n        \"sizeBytes\": { \"type\": \"integer\", \"minimum\": 0 }\n      }\n    }\n  }\n}\n", "./schemas/model-response.schema.json": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"$id\": \"https://github.com/MAGENAIS/MAGENAIS-MODELS/schemas/model-response.schema.json\",\n  \"title\": \"MAGENAIS Model Response\",\n  \"description\": \"The normalized result envelope every MAGENAIS model returns. Mirrors the ModelResponse<T> TypeScript interface used internally by MAGENAIS (MASTER PROMPT V4.1 §13). \\\"output\\\" is intentionally left unconstrained here since its shape is model-specific.\",\n  \"type\": \"object\",\n  \"required\": [\"success\", \"modelId\", \"modelVersion\", \"output\"],\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"success\": {\n      \"type\": \"boolean\"\n    },\n    \"modelId\": {\n      \"type\": \"string\",\n      \"examples\": [\"magenais.decision-score\"]\n    },\n    \"modelVersion\": {\n      \"type\": \"string\",\n      \"pattern\": \"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+(-[0-9A-Za-z-.]+)?(\\\\+[0-9A-Za-z-.]+)?$\"\n    },\n    \"output\": {\n      \"description\": \"Model-specific result payload. Shape is defined by each model's own documentation, not by this envelope.\"\n    },\n    \"confidence\": {\n      \"type\": \"number\",\n      \"minimum\": 0,\n      \"maximum\": 1,\n      \"description\": \"Confidence in the result, where applicable. Should be omitted rather than guessed.\"\n    },\n    \"evidence\": {\n      \"description\": \"Supporting evidence for the result (e.g. which perturbations were tested). Model-specific shape.\"\n    },\n    \"explanation\": {\n      \"type\": \"string\",\n      \"description\": \"Human-readable explanation of how the output was reached.\"\n    },\n    \"warnings\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" },\n      \"description\": \"Caveats the caller/UI should surface, e.g. \\\"small sample size\\\".\"\n    },\n    \"metadata\": {\n      \"type\": \"object\",\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"runtime\": { \"type\": \"string\" },\n        \"executionTimeMs\": { \"type\": \"number\", \"minimum\": 0 },\n        \"datasetSize\": { \"type\": \"integer\", \"minimum\": 0 },\n        \"algorithm\": { \"type\": \"string\" }\n      }\n    }\n  }\n}\n"}</script>
+<div class="doc-modal-backdrop" id="docModal" role="dialog" aria-modal="true" aria-labelledby="docModalTitle" onclick="if (event.target === this) closeDocModal();">
+<div class="doc-modal">
+<div class="doc-modal-head">
+<div class="doc-modal-head-text">
+<span class="doc-modal-eyebrow">Viewing file</span>
+<span class="doc-modal-title" id="docModalTitle">Document</span>
+</div>
+<div class="doc-modal-actions">
+<a class="doc-modal-raw" id="docModalRaw" href="#" target="_blank" rel="noopener">Open raw</a>
+<button type="button" class="doc-modal-close" onclick="closeDocModal()" aria-label="Close">&times;</button>
+</div>
+</div>
+<div class="doc-modal-body" id="docModalBody"><p class="doc-modal-status">Loading&hellip;</p></div>
+</div>
+</div>
+<script>
+(function () {
+  var __docDataEl = document.getElementById('__doc_data__');
+  window.__DOC_DATA__ = __docDataEl ? JSON.parse(__docDataEl.textContent) : {};
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function mdToHtml(md) {
+    var codeBlocks = [];
+    var html = md.replace(/```[a-zA-Z0-9]*\n([\s\S]*?)```/g, function (m, code) {
+      codeBlocks.push('<pre><code>' + escapeHtml(code.replace(/\n$/, '')) + '</code></pre>');
+      return '\u0000' + (codeBlocks.length - 1) + '\u0000';
+    });
+    html = escapeHtml(html);
+    html = html
+      .replace(/^###### (.*)$/gm, '<h6>$1</h6>')
+      .replace(/^##### (.*)$/gm, '<h5>$1</h5>')
+      .replace(/^#### (.*)$/gm, '<h4>$1</h4>')
+      .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+      .replace(/^# (.*)$/gm, '<h1>$1</h1>');
+    html = html
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2</em>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    html = html.replace(/(^|\n)[-*] (.*)/g, function (m, pre, text) { return pre + '<li>' + text + '</li>'; });
+    html = html.replace(/(<li>[\s\S]*?<\/li>\n?)+/g, function (m) { return '<ul>' + m + '</ul>'; });
+    html = html.split(/\n{2,}/).map(function (block) {
+      block = block.trim();
+      if (block === '') return '';
+      if (/^<(h\d|ul|pre|table)/.test(block)) return block;
+      return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+    }).join('\n');
+    html = html.replace(/\u0000(\d+)\u0000/g, function (m, i) { return codeBlocks[parseInt(i, 10)]; });
+    return html;
+  }
+  function renderDoc(body, url, text) {
+    if (/\.(md|markdown)$/i.test(url)) {
+      body.innerHTML = mdToHtml(text);
+    } else {
+      body.innerHTML = '<pre><code>' + escapeHtml(text) + '</code></pre>';
+    }
+  }
+  window.openDocModal = function (url, title) {
+    var backdrop = document.getElementById('docModal');
+    var body = document.getElementById('docModalBody');
+    var titleEl = document.getElementById('docModalTitle');
+    var rawEl = document.getElementById('docModalRaw');
+    titleEl.textContent = title || url;
+    rawEl.href = url;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Every linked file is embedded directly in this page at build time (see the
+    // __DOC_DATA__ JSON block below), so viewing it here never depends on fetch() —
+    // which browsers block for local file:// pages and which would otherwise be the
+    // only way this worked. fetch() below is kept purely as a fallback for any URL
+    // that was not embedded (e.g. an external link opened in the viewer by mistake).
+    var embedded = window.__DOC_DATA__ && Object.prototype.hasOwnProperty.call(window.__DOC_DATA__, url)
+      ? window.__DOC_DATA__[url] : null;
+    if (embedded !== null) {
+      renderDoc(body, url, embedded);
+      return;
+    }
+    body.innerHTML = '<p class="doc-modal-status">Loading&hellip;</p>';
+    fetch(url, { cache: 'no-store' })
+      .then(function (res) { if (!res.ok) throw new Error('fetch failed'); return res.text(); })
+      .then(function (text) { renderDoc(body, url, text); })
+      .catch(function () {
+        body.innerHTML = '<p class="doc-modal-status">This file could not be loaded here &mdash; <a href="' + url + '" target="_blank" rel="noopener">open it directly</a> instead.</p>';
+      });
+  };
+  window.closeDocModal = function () {
+    document.getElementById('docModal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDocModal();
+  });
+  document.querySelectorAll('a[data-doc]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      openDocModal(a.getAttribute('href'), a.getAttribute('data-doc-title') || a.textContent.trim());
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

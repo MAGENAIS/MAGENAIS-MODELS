@@ -109,6 +109,29 @@
     "documentation": {
       "type": "string",
       "format": "uri"
+    },
+    "artifact": {
+      "type": "object",
+      "description": "Present only on an entry for a model installed from an external artifact rather than one built into MAGENAIS. Added in Phase 16 (Installer/Catalog Foundation, MASTER PROMPT V4.1 §32-34); none of the three initial models set this.",
+      "required": ["url", "checksum"],
+      "additionalProperties": false,
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "checksum": {
+          "type": "object",
+          "required": ["algorithm", "value"],
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": { "type": "string", "enum": ["sha256"] },
+            "value": {
+              "type": "string",
+              "description": "Lowercase hex-encoded digest.",
+              "pattern": "^[0-9a-f]+$"
+            }
+          }
+        },
+        "sizeBytes": { "type": "integer", "minimum": 0 }
+      }
     }
   }
 }
